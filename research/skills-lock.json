@@ -1,0 +1,34 @@
+[
+  {
+    "name": "api-design",
+    "path": ".agents/skills/api-design/SKILL.md",
+    "repository": "affaan-m/ecc",
+    "reviewed_checkout_commit": "928c1dea72f5c330442fc1f595563398b8f389f7",
+    "sha256": "bfae53167acc91caff0ff9ab73a80ee3fd92caccdfa445c88302c3bf95255156",
+    "matches_reviewed_checkout": true
+  },
+  {
+    "name": "eval-harness",
+    "path": ".agents/skills/eval-harness/SKILL.md",
+    "repository": "affaan-m/ecc",
+    "reviewed_checkout_commit": "928c1dea72f5c330442fc1f595563398b8f389f7",
+    "sha256": "b99640c99ebf5f094c901644fc0f3125f9dead756b9a0c3b6b3593f53dfea2f9",
+    "matches_reviewed_checkout": true
+  },
+  {
+    "name": "security-review",
+    "path": ".agents/skills/security-review/SKILL.md",
+    "repository": "affaan-m/ecc",
+    "reviewed_checkout_commit": "928c1dea72f5c330442fc1f595563398b8f389f7",
+    "sha256": "fe6f9151fb15c1dffd47a55080c3ad147af7c95dd0ad3714735dec6824b060b7",
+    "matches_reviewed_checkout": true
+  },
+  {
+    "name": "verification-before-completion",
+    "path": ".agents/skills/verification-before-completion/SKILL.md",
+    "repository": "obra/superpowers",
+    "reviewed_checkout_commit": "b36e0829c6d0140e93cfef2ca599b1b07d4a7797",
+    "sha256": "2befe7fc55bcadaa3d97dd9e8efeb633d2561c0ebe74c5a8b17c4d9e7e4520b3",
+    "matches_reviewed_checkout": true
+  }
+]
