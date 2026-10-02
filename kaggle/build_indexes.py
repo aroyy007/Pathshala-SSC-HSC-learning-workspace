@@ -35,6 +35,10 @@ BOOKS = {
     "hsc-2026-bangla-1": {"level": "HSC", "paper": 1, "title": "সাহিত্যপাঠ"},
     "hsc-2026-bangla-2": {"level": "HSC", "paper": 2, "title": "বাংলা দ্বিতীয় পত্র"},
 }
+BOOK_GROUPS = {
+    "ssc": ["ssc-2026-bangla-1", "ssc-2026-bangla-2"],
+    "hsc": ["hsc-2026-bangla-1", "hsc-2026-bangla-2"],
+}
 MODEL_ID = "Qwen/Qwen3-Embedding-0.6B"
 PADDLE_OCR_VERSION = "v1.6"
 PIPELINE_VERSION = "kaggle-paddle-vl-tesseract-page-sentence-v2"
@@ -133,9 +137,9 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def locate_pdfs() -> dict[str, Path]:
+def locate_pdfs(book_ids: list[str]) -> dict[str, Path]:
     located = {}
-    for book_id in BOOKS:
+    for book_id in book_ids:
         matches = list(INPUT_ROOT.rglob(f"{book_id}.pdf"))
         if len(matches) != 1:
             raise RuntimeError(
@@ -417,8 +421,17 @@ def write_index(book_id, pdf_path, source_hash, pages, chunks, vectors, settings
 
 
 def package_output(manifests: list[dict]):
+    merged = {}
+    for manifest in manifests:
+        merged[manifest["book_id"]] = manifest
+    for active_path in (OUTPUT_ROOT / "indexes").glob("*/active.json"):
+        active = json.loads(active_path.read_text())
+        merged[active["book_id"]] = active
     (OUTPUT_ROOT / "build-summary.json").write_text(
-        json.dumps({"indexes": manifests}, indent=2)
+        json.dumps(
+            {"indexes": [merged[key] for key in sorted(merged)]},
+            indent=2,
+        )
     )
     archive = Path("/kaggle/working/pathshala-indexes.zip")
     with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED) as bundle:
@@ -431,7 +444,12 @@ def package_output(manifests: list[dict]):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--book", choices=[*BOOKS, "all"], default="all")
+    parser.add_argument(
+        "--book",
+        choices=[*BOOKS, *BOOK_GROUPS, "all"],
+        default="all",
+        help="One book, the ssc/hsc group, or all four books",
+    )
     parser.add_argument("--ocr-workers", type=int, default=2)
     parser.add_argument("--embed-batch-size", type=int, default=32)
     parser.add_argument("--dpi", type=int, default=250)
@@ -454,8 +472,14 @@ def main():
         embed_batch_size=max(1, args.embed_batch_size),
     )
     tesseract_version = check_ocr() if args.stage != "index" else "not-used-during-index-stage"
-    pdfs = locate_pdfs()
-    selected = BOOKS if args.book == "all" else {args.book: BOOKS[args.book]}
+    if args.book == "all":
+        selected_ids = list(BOOKS)
+    elif args.book in BOOK_GROUPS:
+        selected_ids = BOOK_GROUPS[args.book]
+    else:
+        selected_ids = [args.book]
+    selected = {book_id: BOOKS[book_id] for book_id in selected_ids}
+    pdfs = locate_pdfs(selected_ids)
     if args.stage == "index":
         primary_ocr = type(
             "CachedPaddleOcr",

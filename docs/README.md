@@ -17,6 +17,7 @@ This directory holds the specifications and operating documents for Pathshala. S
 - [Architecture](ARCHITECTURE.md)
 - [API](API.md)
 - [Data and indexing](DATA-AND-INDEXING.md)
+- [OKF integration](OKF-INTEGRATION.md)
 - [Evaluation](EVALUATION.md)
 - [Repository guide](REPOSITORY.md)
 - [Contributing](CONTRIBUTING.md)

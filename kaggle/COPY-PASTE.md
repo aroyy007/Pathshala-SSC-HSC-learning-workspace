@@ -1,7 +1,8 @@
 # Kaggle copy/paste cells
 
-Use the canonical cell-by-cell notebook in
-[RUN-ALL-KAGGLE.md](RUN-ALL-KAGGLE.md).
+For a two-session run, use [01_ssc_books.ipynb](01_ssc_books.ipynb) and then
+[02_hsc_books_and_final_index.ipynb](02_hsc_books_and_final_index.ipynb). The
+complete copy/paste reference remains [RUN-ALL-KAGGLE.md](RUN-ALL-KAGGLE.md).
 
 That notebook keeps PaddleOCR and PyTorch in separate environments and includes
 the Kaggle `sitecustomize`/`wrapt` fix. Older instructions that installed

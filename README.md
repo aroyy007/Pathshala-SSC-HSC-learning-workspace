@@ -85,7 +85,7 @@ hsc-2026-bangla-1.pdf
 hsc-2026-bangla-2.pdf
 ```
 
-For the reliable long-running path, attach those four files as a private Kaggle dataset, enable a GPU, and follow [kaggle/RUN-ALL-KAGGLE.md](kaggle/RUN-ALL-KAGGLE.md). The notebook writes `/kaggle/working/pathshala-indexes.zip`.
+For the reliable long-running path, attach those four files as a private Kaggle dataset, enable a GPU, and run [kaggle/01_ssc_books.ipynb](kaggle/01_ssc_books.ipynb) first, followed by [kaggle/02_hsc_books_and_final_index.ipynb](kaggle/02_hsc_books_and_final_index.ipynb). The first notebook exports resumable SSC artifacts; the second writes `/kaggle/working/pathshala-indexes.zip`. The full copy-paste reference is [kaggle/RUN-ALL-KAGGLE.md](kaggle/RUN-ALL-KAGGLE.md).
 
 Keep that ZIP private: it contains source PDFs, OCR output, and embeddings. After the OCR review gate, validate and import it locally:
 
@@ -101,6 +101,7 @@ The importer refuses invalid paths, mismatched hashes, malformed vectors, duplic
 - [Architecture](docs/ARCHITECTURE.md) — runtime components, data flow, boundaries, and failure handling.
 - [API reference](docs/API.md) — implemented REST endpoints, request bodies, response shapes, errors, cookies, and rate limits.
 - [Data and indexing](docs/DATA-AND-INDEXING.md) — source manifest, OCR checkpoints, chunking, index format, and import gates.
+- [OKF integration](docs/OKF-INTEGRATION.md) — curated concept layer for reviewed explanations and grammar knowledge.
 - [Evaluation](docs/EVALUATION.md) — retrieval, grounding, abstention, language, and release metrics.
 - [Deployment](docs/DEPLOYMENT.md) — local, staging, and production deployment constraints.
 - [Security](docs/SECURITY.md) — secrets, private corpus handling, request limits, and threat model.

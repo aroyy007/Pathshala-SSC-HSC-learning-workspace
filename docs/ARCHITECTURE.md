@@ -93,3 +93,5 @@ The pilot intentionally uses SQLite for session metadata, immutable JSON/NumPy f
 ## Future extensions
 
 Board questions, official keys, licensed solutions, notebook items, audio, and narrated-slide video must enter through separate source and review workflows. They must carry their own rights status, authority tier, version, and evaluation labels; they are not appended to the textbook index as untyped text.
+
+An optional OKF bundle can hold reviewed concepts, aliases, grammar rules, and learning objectives. It is a navigation and teaching layer over the source index; it cannot replace page-level PDF evidence or bypass the OCR and rights gates.

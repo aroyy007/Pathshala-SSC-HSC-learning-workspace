@@ -1,6 +1,11 @@
 # Kaggle GPU indexing runbook
 
-`RUN-ALL-KAGGLE.md` is the canonical copy-paste notebook sequence. This page explains the inputs, privacy boundary, and import handoff; use the linked runbook for the current isolated PaddleOCR environment and resumable one-book commands.
+The two ready-to-run notebooks are the recommended path when Kaggle session time is limited:
+
+- [01_ssc_books.ipynb](01_ssc_books.ipynb) — OCR and index both SSC books, then download `ssc-indexes.zip` and `ssc-ocr-checkpoints.zip`.
+- [02_hsc_books_and_final_index.ipynb](02_hsc_books_and_final_index.ipynb) — restore those artifacts, OCR and index both HSC books, then download the final `pathshala-indexes.zip` containing all four books.
+
+`RUN-ALL-KAGGLE.md` remains the canonical copy-paste reference. This page explains the inputs, privacy boundary, and import handoff; use the linked notebooks or runbook for the current isolated PaddleOCR environment and resumable group commands.
 
 ## Expected time
 
@@ -17,7 +22,7 @@ The corpus has 1,186 PDF pages. OCR is the long stage and uses the GPU-backed Pa
 3. Enable a GPU accelerator. Enable Internet for the initial model/package download.
 4. Do not put Gemini or Hugging Face keys in notebook cells. Qwen3-Embedding-0.6B is public and normally needs no token.
 
-For the exact cell-by-cell sequence, open [RUN-ALL-KAGGLE.md](RUN-ALL-KAGGLE.md). The older compact command below is suitable only when the runtime and installed OCR environment are already known to work.
+For the exact cell-by-cell sequence, open [RUN-ALL-KAGGLE.md](RUN-ALL-KAGGLE.md). It runs SSC first, then HSC, and packages the final four-book archive. The older compact command below is suitable only when the runtime and installed OCR environment are already known to work.
 
 Run these notebook cells:
 
